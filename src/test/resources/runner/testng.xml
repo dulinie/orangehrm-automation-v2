@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-current.dtd">
+
+<suite name="OrangeHRM Automation Suite V2">
+    <listeners>
+        <listener class-name="com.dulinie.automation.listeners.TestNGListener"/>
+
+    </listeners>
+
+
+    <test name="Orange HRM Test Suite">
+        <classes>
+            <class name="com.dulinie.automation.tests.LoginTest"/>
+        </classes>
+    </test>
+</suite>

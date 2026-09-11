@@ -2,7 +2,9 @@ package com.dulinie.automation.driver;
 
 
 import com.dulinie.automation.utils.PropertyReader;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
