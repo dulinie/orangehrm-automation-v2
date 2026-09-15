@@ -1,20 +1,21 @@
 package com.dulinie.automation.pages;
 
 import com.dulinie.automation.driver.DriverManager;
+import com.dulinie.automation.utils.PropertyReader;
+import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 
 public class LoginPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     //Definning Object Repository for Login Page
-    private By username = By.name("username");
-    private By password = By.name("password");
-    private By loginButton = By.xpath("//button[@type='submit']");
-    private By orangeHrmLogo =By.xpath("//img[@alt='company-branding']");
+    private final By username = By.name("username");
+    private final By password = By.name("password");
+    private final By loginButton = By.xpath("//button[@type='submit']");
+    private final By orangeHrmLogo =By.xpath("//img[@alt='company-branding']");
 
 
 
@@ -23,15 +24,35 @@ public class LoginPage {
 
     }
 
+    public void loginWithDefaultCredentials() {
+        // Use getEnvProperty so it automatically adapts to whatever environment is active
+        String user = PropertyReader.getProperty("username");
+        String pass = PropertyReader.getProperty("password");
+
+        // Pass them into your main interaction method
+        login(user, pass);
+    }
+
     public void login(String user, String pass) {
-        driver.findElement(username).sendKeys(user);
-        driver.findElement(password).sendKeys(pass);
-        driver.findElement(loginButton).click();
+
+
+        // Wait for fields to be visible before interacting
+        WaitUtils.waitForElementToBeVisible(driver, username).sendKeys(user);
+        WaitUtils.waitForElementToBeVisible(driver, password).sendKeys(pass);
+
+        // Wait for the button to be clickable before clicking
+        WaitUtils.waitForElementToBeClickable(driver, loginButton).click();
     }
 
     public boolean isLogoDisplayed()
     {
-        return driver.findElement(orangeHrmLogo).isDisplayed();
+        try{
+            return WaitUtils.waitForElementToBeInvisible(driver, orangeHrmLogo);
+
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     public String validateLoginPageTitle(){

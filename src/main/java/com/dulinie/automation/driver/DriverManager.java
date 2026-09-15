@@ -34,7 +34,7 @@ public class DriverManager {
 
     public static void initializeDriver() {
         String browser =  PropertyReader.getProperty("browser");
-        String url =PropertyReader.getProperty("url");
+        String url =PropertyReader.getProperty("url.qa");
 
         if(browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
@@ -50,8 +50,6 @@ public class DriverManager {
             throw new RuntimeException("Unsupported browser specified in config: " + browser);
 
         getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         getDriver().get(url);
 
     }
