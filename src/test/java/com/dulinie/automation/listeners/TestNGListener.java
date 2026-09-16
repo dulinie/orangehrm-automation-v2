@@ -5,8 +5,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.dulinie.automation.config.ConfigManager;
 import com.dulinie.automation.driver.DriverManager;
-import com.dulinie.automation.utils.PropertyReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
@@ -49,13 +49,15 @@ public class TestNGListener implements ITestListener {
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
-        // Dynamic dashboard info from your properties file
-        extent.setSystemInfo("Target URL", PropertyReader.getProperty("url"));
-        extent.setSystemInfo("Test User Profile", PropertyReader.getProperty("username"));
+        // Dynamic dashboard info from your properties file though config manager
+        extent.setSystemInfo("Target URL", ConfigManager.getConfig().url());
+        extent.setSystemInfo("Test User Profile", ConfigManager.getConfig().username());
 
-        // System info from the local machine executing the test execution
-        extent.setSystemInfo("Environment", "QA");
-        extent.setSystemInfo("Framework", "Selenium Java");
+        // Make the report environment dynamic! Reads your runtime flag (e.g., QA, STAGE)
+        String activeEnv = System.getProperty("env", "QA").toUpperCase();
+        extent.setSystemInfo("Environment", activeEnv);
+
+        extent.setSystemInfo("Framework", "Selenium Java (Owner API)");
         extent.setSystemInfo("User", System.getProperty("user.name"));
 
     }

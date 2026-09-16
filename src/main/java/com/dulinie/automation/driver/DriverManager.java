@@ -1,16 +1,13 @@
 package com.dulinie.automation.driver;
 
 
-import com.dulinie.automation.utils.PropertyReader;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.time.Duration;
+import com.dulinie.automation.config.ConfigManager;
 
 
 public class DriverManager {
@@ -33,8 +30,9 @@ public class DriverManager {
     }
 
     public static void initializeDriver() {
-        String browser =  PropertyReader.getProperty("browser");
-        String url =PropertyReader.getProperty("url.qa");
+        String browser = ConfigManager.getConfig().browser();
+        String url = ConfigManager.getConfig().url();
+
 
         if(browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();

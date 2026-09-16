@@ -1,7 +1,7 @@
 package com.dulinie.automation.pages;
 
+import com.dulinie.automation.config.ConfigManager;
 import com.dulinie.automation.driver.DriverManager;
-import com.dulinie.automation.utils.PropertyReader;
 import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,9 +25,9 @@ public class LoginPage {
     }
 
     public void loginWithDefaultCredentials() {
-        // Use getEnvProperty so it automatically adapts to whatever environment is active
-        String user = PropertyReader.getProperty("username");
-        String pass = PropertyReader.getProperty("password");
+        // Get Data from config factory
+        String user = ConfigManager.getConfig().username();
+        String pass = ConfigManager.getConfig().password();
 
         // Pass them into your main interaction method
         login(user, pass);
@@ -42,6 +42,8 @@ public class LoginPage {
 
         // Wait for the button to be clickable before clicking
         WaitUtils.waitForElementToBeClickable(driver, loginButton).click();
+
+
     }
 
     public boolean isLogoDisplayed()

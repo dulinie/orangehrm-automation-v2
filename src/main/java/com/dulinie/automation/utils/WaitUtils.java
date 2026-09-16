@@ -9,23 +9,23 @@ import java.util.List;
 import java.util.function.Function;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import com.dulinie.automation.config.ConfigManager;
 
 
 
 public class WaitUtils {
 
     // Thread-safe dynamic lookups from your config file
-    private static long getTimeout() {
-        String timeoutValue = PropertyReader.getProperty("explicit.wait.timeout");
+     private static long getTimeout() {
+        // Setting up your wait timeouts without parsing Strings manually
+        return ConfigManager.getConfig().timeout();
 
-        // If the key doesn't exist in config.properties, safely default to 10 seconds
-        return (timeoutValue != null) ? Long.parseLong(timeoutValue) : 10L;
     }
 
 
-    private static WebDriverWait getWait(WebDriver driver) {
-        return new WebDriverWait(driver, Duration.ofSeconds(getTimeout()));
-    }
+        private static WebDriverWait getWait(WebDriver driver) {
+            return new WebDriverWait(driver, Duration.ofSeconds(getTimeout()));
+        }
 
 
         public static WebElement waitForElementToBeVisible(WebDriver driver, By locator) {
