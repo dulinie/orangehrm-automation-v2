@@ -13,7 +13,7 @@ import org.aeonbits.owner.Config;
 public interface FrameworkConfig extends Config{
 
         @Key("browser")
-       // @DefaultValue("chrome") // Fallback default if not explicitly provided
+        @DefaultValue("chrome") // Fallback default if not explicitly provided
         String browser();
 
         @Key("url")
