@@ -45,5 +45,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Automation-Execution-Reports
-          path: automation-reports/latest-run/
-          retention-days: 14
+          path: |
+            **/automation-reports/latest-run/**
+              automation-reports/latest-run/**
+              **/target/automation-reports/latest-run/**
+          retention-days: 7
+
