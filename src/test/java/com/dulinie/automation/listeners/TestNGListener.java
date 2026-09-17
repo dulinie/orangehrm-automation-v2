@@ -33,21 +33,36 @@ public class TestNGListener implements ITestListener {
     public void onStart(ITestContext context) {
         log.info("▶️ STARTING TEST SUITE: " + context.getName());
 
-        // 1. Generate a unique timestamp matching your Log4j2 pattern (yyyyMMdd_HHmmss)
+        // Generate a unique timestamp matching your Log4j2 pattern (yyyyMMdd_HHmmss)
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
 
-        // 2. Point path to the persistent "automation-reports" folder outside of target
-        String reportPath = "automation-reports/Run_" + timestamp + "/Automation Execution Report.html";
+        /* Point path to the persistent "automation-reports" folder outside of target
+         Define path A: Your historical timestamped path for local execution runs*/
+
+        String historyReportPath  = "automation-reports/Run_" + timestamp + "/Automation Execution Report.html";
+
+        //Define path B: A flat, predictable path specifically for GitHub Actions/Jenkins
+        String staticReportPath  = "automation-reports/latest-run/Automation Execution Report.html";
+
+        // Create the historical tracker reporter
+        ExtentSparkReporter sparkHistory  = new ExtentSparkReporter(historyReportPath);
+        sparkHistory.config().setReportName("Parallel Automation Dashboard(History)");
+        sparkHistory.config().setDocumentTitle("Test Execution Report");
+        sparkHistory.config().setTheme(Theme.DARK);
 
 
-        // Configures the HTML file output path
-        ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
-        spark.config().setReportName("Parallel Automation Dashboard");
-        spark.config().setDocumentTitle("Test Execution Report");
-        spark.config().setTheme(Theme.DARK);
 
+        // Create the CI/CD predictable reporter
+        ExtentSparkReporter sparkStatic = new ExtentSparkReporter(staticReportPath);
+        sparkStatic .config().setReportName("Parallel Automation Dashboard(CI/CD)");
+        sparkStatic .config().setDocumentTitle("Test Execution Report");
+        sparkStatic .config().setTheme(Theme.DARK);
+
+
+        // Initialize and attach BOTH reporters seamlessly
         extent = new ExtentReports();
-        extent.attachReporter(spark);
+        extent.attachReporter(sparkHistory, sparkStatic); // The engine outputs to both paths at once!
+
 
         // Dynamic dashboard info from your properties file though config manager
         extent.setSystemInfo("Target URL", ConfigManager.getConfig().url());

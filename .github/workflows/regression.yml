@@ -38,15 +38,12 @@ jobs:
       - name: Execute Parallel Test Suite
         run: mvn clean test -Denv=qa -Dheadless=true || true
 
-      # 5. Save your Extent Report (Looks in root and subdirectories dynamically)
+
+      # 5. Save your Extent Report stably from the fixed directory path
       - name: Archive Test Execution Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Automation-Execution-Reports
-          path: |
-            **/automation-reports/**
-            automation-reports/**
-             **/target/automation-reports/**
-              include-hidden-files: true
+          path: automation-reports/latest-run/
           retention-days: 14
