@@ -39,10 +39,10 @@ public class TestNGListener implements ITestListener {
         /* Point path to the persistent "automation-reports" folder outside of target
          Define path A: Your historical timestamped path for local execution runs*/
 
-        String historyReportPath  = "automation-reports/Run_" + timestamp + "/Automation Execution Report.html";
+        String historyReportPath  = "target/automation-reports/Run_" + timestamp + "/Automation Execution Report.html";
 
         //Define path B: A flat, predictable path specifically for GitHub Actions/Jenkins
-        String staticReportPath  = "automation-reports/latest-run/Automation Execution Report.html";
+        String staticReportPath  = "target/automation-reports/latest-run/Automation Execution Report.html";
 
         // Create the historical tracker reporter
         ExtentSparkReporter sparkHistory  = new ExtentSparkReporter(historyReportPath);
