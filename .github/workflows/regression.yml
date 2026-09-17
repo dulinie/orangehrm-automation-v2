@@ -1,33 +1,32 @@
 name: OrangeHRM Parallel Automation Suite
 
-# Controls when the pipeline runs
 on:
   push:
-    branches: [ main, master ]  # Triggers the run every time you push code to these branches
+    branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:            # Allows you to click a "Run Workflow" button manually on GitHub
+  workflow_dispatch:
 
 jobs:
   automation-test:
-    runs-on: ubuntu-latest      # Runs tests on a lightning-fast hosted Linux cloud machine
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. Pull down your test automation code from your repository
+      # 1. Pull down your test automation code using the Node 24 compatible version
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.0
 
-      # 2. Set up Java Environment in the cloud machine
+      # 2. Set up Java Environment using the Node 24 compatible version
       - name: Set up JDK 11
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v4.4.0
         with:
           java-version: '11'
           distribution: 'temurin'
           cache: 'maven'
 
-      # 3. Cache Maven dependencies to make future pipeline runs incredibly fast
+      # 3. Cache Maven dependencies using the Node 24 compatible version
       - name: Cache Maven packages
-        uses: actions/cache@v4
+        uses: actions/cache@v4.1.1
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -35,15 +34,14 @@ jobs:
             ${{ runner.os }}-maven-
 
       # 4. Run your TestNG suite concurrently against the public demo site
-      # The "-Dheadless=true" flag tells Selenium to run without a visual UI inside Linux
       - name: Execute Parallel Test Suite
         run: mvn clean test -Denv=qa -Dheadless=true
 
-      # 5. Save your Extent Report as an execution artifact if tests fail or pass
+      # 5. Save your Extent Report using the Node 24 compatible version
       - name: Archive Test Execution Reports
-        if: always()             # Ensures reports are uploaded even if tests fail!
-        uses: actions/upload-artifact@v4
+        if: always()
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: Automation-Execution-Reports
           path: automation-reports/
-          retention-days: 14     # Keeps reports for 2 weeks before clearing space
+          retention-days: 14
