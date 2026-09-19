@@ -34,4 +34,9 @@ public class AdminPage {
 
         }
     }
+
+    public void verifyNavigateAddUser(){
+        WaitUtils.waitForElementToBeClickable(driver,addEmployeeButton).click();
+
+    }
 }

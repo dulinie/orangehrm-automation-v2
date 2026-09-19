@@ -19,31 +19,25 @@ public class DashboardTest extends BaseTest {
     public void initializePage() {
         // Initialize the page object once before every test method execution
         loginPage = new LoginPage();
-        dashboardPage = new DashboardPage();
-        adminPage = new AdminPage();
-
         loginPage.loginWithDefaultCredentials();
 
             }
 
     @Test(priority = 1,description = "Verify that the Dashboard Heading is displayed in the Dashboard page")
     public void verifyDashboardHeaderDisplay() {
+        dashboardPage = new DashboardPage();
         boolean isHeaderDispayed = dashboardPage.isDashboardHeaderDisplayed();
         Assert.assertTrue(isHeaderDispayed,"OrangeHRM Dashboard header was not displayed on the dashboard page.");
     }
 
     @Test(priority = 2, description = "Verify that the login page title is correct")
     public void verifyDashboardPageTitle(){
+        dashboardPage = new DashboardPage();
         String pageTitle = dashboardPage.validateDashboardPageTitle();
         Assert.assertEquals(pageTitle,"OrangeHRM", "The dashboard page title does not match.");
     }
 
-    @Test
-    public void testNavigationToAdmin() {
-            AdminPage adminPage = dashboardPage.clickAdminMenu();
-            boolean isAdminHeaderVisible = adminPage.isAdminPageHeaderDisplayed();
-            Assert.assertTrue(isAdminHeaderVisible, "Failed to navigate to the Admin page. Header not found.");
-    }
+
     }
 
 

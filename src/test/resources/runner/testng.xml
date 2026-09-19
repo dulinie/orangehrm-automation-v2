@@ -14,6 +14,10 @@
     <test name="Orange HRM Test Suite">
         <classes>
             <class name="com.dulinie.automation.tests.LoginTest"/>
+            <class name="com.dulinie.automation.tests.DashboardTest"/>
+           <!-- <class name="com.dulinie.automation.tests.LoginDataDrivenTest"/>-->
+            <class name="com.dulinie.automation.tests.AdminTest"/>
+            <class name="com.dulinie.automation.tests.AddUserTest"/>
         </classes>
     </test>
 </suite>

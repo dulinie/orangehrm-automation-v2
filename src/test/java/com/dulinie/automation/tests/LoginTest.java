@@ -1,11 +1,9 @@
 package com.dulinie.automation.tests;
 
 import com.dulinie.automation.base.BaseTest;
-import com.dulinie.automation.pages.AdminPage;
 import com.dulinie.automation.pages.DashboardPage;
 import com.dulinie.automation.pages.LoginPage;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
@@ -13,13 +11,6 @@ public class LoginTest extends BaseTest {
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
 
-    @BeforeMethod
-    public void initializePage() {
-        // Initialize the page object once before every test method execution
-        //loginPage = new LoginPage();
-       // dashboardPage= new DashboardPage();
-
-    }
 
     @Test(priority = 1,description = "Verify that the OrangeHRM logo is displayed on the login page")
     public void verifyLogoDisplay() {

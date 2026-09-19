@@ -1,0 +1,20 @@
+[
+  {
+    "testCaseName": "Login with empty credentials",
+    "username": "",
+    "password": "",
+    "errorMessage": "Required"
+  },
+  {
+    "testCaseName": "Login with invalid username",
+    "username": "InvalidUser",
+    "password": "admin123",
+    "errorMessage": "Invalid credentials"
+  },
+  {
+    "testCaseName": "Login with invalid password",
+    "username": "Admin",
+    "password": "WrongPassword",
+    "errorMessage": "Invalid credentials"
+  }
+]
