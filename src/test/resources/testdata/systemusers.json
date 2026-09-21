@@ -1,0 +1,26 @@
+[
+  {
+    "userRole": "Admin",
+    "employeeName": "John Doe",
+    "status": "Enabled",
+    "usename": "johndoe",
+    "passsword": "password123",
+    "confirmpassword": "password123"
+  },
+  {
+    "userRole": "ESS",
+    "employeeName": "Radha  Gupta",
+    "status": "Disabled",
+    "usename": "radhagupta",
+    "passsword": "password123",
+    "confirmpassword": "password123"
+  },
+  {
+    "userRole": "Admin",
+    "employeeName": "Thomas Kutty Benny",
+    "status": "Enabled",
+    "usename": "thomaskuttyb",
+    "passsword": "password123",
+    "confirmpassword": "password123"
+  }
+]
