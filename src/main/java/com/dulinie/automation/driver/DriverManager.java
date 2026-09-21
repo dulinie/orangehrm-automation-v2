@@ -1,8 +1,5 @@
 package com.dulinie.automation.driver;
 
-
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,8 +26,10 @@ public class DriverManager {
 
 
     public static void setDriver(WebDriver webDriver) {
+
         driver.set(webDriver);
     }
+
 
     public static void initializeDriver() {
 
@@ -44,7 +43,7 @@ public class DriverManager {
         boolean isHeadless = System.getProperty("headless", "false").equalsIgnoreCase("true");
 
         if(browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
+
 
             ChromeOptions options = new ChromeOptions();
             if (isHeadless) {
@@ -57,7 +56,7 @@ public class DriverManager {
             setDriver(new ChromeDriver(options));
 
         }else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
+
             FirefoxOptions options = new FirefoxOptions();
             if (isHeadless) {
                 options.addArguments("--headless");
@@ -66,7 +65,6 @@ public class DriverManager {
             setDriver(new FirefoxDriver(options));
 
         } else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             if (isHeadless) {
                 options.addArguments("--headless=new");

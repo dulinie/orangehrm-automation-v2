@@ -1,26 +1,26 @@
 [
   {
-    "userRole": "Admin",
+    "role": "Admin",
     "employeeName": "John Doe",
     "status": "Enabled",
-    "usename": "johndoe",
-    "passsword": "password123",
-    "confirmpassword": "password123"
+    "username": "johndoe",
+    "password": "password123",
+    "confirmPassword": "password123"
   },
   {
-    "userRole": "ESS",
+    "role": "ESS",
     "employeeName": "Radha  Gupta",
     "status": "Disabled",
-    "usename": "radhagupta",
-    "passsword": "password123",
-    "confirmpassword": "password123"
+    "username": "radhagupta",
+    "password": "password123",
+    "confirmPassword": "password123"
   },
   {
-    "userRole": "Admin",
+    "role": "Admin",
     "employeeName": "Thomas Kutty Benny",
     "status": "Enabled",
-    "usename": "thomaskuttyb",
-    "passsword": "password123",
-    "confirmpassword": "password123"
+    "username": "thomaskuttyb",
+    "password": "password123",
+    "confirmPassword": "password123"
   }
 ]
