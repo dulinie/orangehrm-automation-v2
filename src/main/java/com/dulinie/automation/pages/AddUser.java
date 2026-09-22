@@ -5,30 +5,55 @@ import com.dulinie.automation.models.SystemUser;
 import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.support.ui.Wait;
 
 
 public class AddUser {
 
-       private final WebDriver driver;
+      // private final WebDriver driver;
 
         // Object Repository
+        private final By addUserHeading = By.xpath("//h6[text()='Add User']");
         private final By userRoleDropdown = By.xpath("//label[text()='User Role']/../following-sibling::div//div[@class='oxd-select-text-input']");
         private final By employeeNameInput = By.xpath("//label[text()='Employee Name']/../following-sibling::div//input");
-        private final By empNameOptions = By.xpath("//div[@role='listbox']//div[@role='option']");
         private final By statusDropdown = By.xpath("//label[text()='Status']/../following-sibling::div//div[@class='oxd-select-text-input']");
         private final By usernameInput = By.xpath("//form//label[text()='Username']/../following-sibling::div//input");
         private final By passwordInput = By.xpath("//label[text()='Password']/../following-sibling::div//input[@type='password']");
         private final By confirmPasswordInput = By.xpath("//label[text()='Confirm Password']/../following-sibling::div//input[@type='password']");
         private final By saveButton = By.xpath("//button[@type='submit' and normalize-space()='Save']");
 
-        public AddUser() {
+        //This code is commented to fix the issue mix session while parallel testing
+       /* public AddUser() {
             this.driver = DriverManager.getDriver();
-        }
+        }*/
 
         public String validateAddUserPageTitle() {
-            return driver.getTitle();
+            return DriverManager.getDriver().getTitle();
         }
+
+        public boolean validateAddUserPageHeader(){
+            try {
+                return WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(), addUserHeading).isDisplayed();
+            }
+            catch (Exception e){
+                return false;
+
+            }
+
+
+    }
+
+    public String validateAddUserHeaderName(){
+            try{
+                return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),addUserHeading)).getText();
+
+            }
+            catch (Exception e) {
+                return "";
+            }
+
+
+    }
 
         /**
          * Fills out and submits the Add User form using the encapsulated SystemUser data model.
@@ -39,26 +64,34 @@ public class AddUser {
             selectDropdownValue(userRoleDropdown, user.getRole());
 
             // Handle autocomplete employee name lookup field
-            WaitUtils.waitForElementToBeClickable(driver, employeeNameInput).sendKeys(user.getEmployeeName());
-            WaitUtils.waitForElementWithPolling(driver, empNameOptions).click();
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), employeeNameInput).sendKeys(user.getEmployeeName());
+
+
+            // Build a targeted dynamic locator using the employee's exact name
+            By dynamicEmpOption = By.xpath("//div[@role='listbox']//div[@role='option' and contains(., '" + user.getEmployeeName() + "')]");
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), dynamicEmpOption).click();
+
 
             selectDropdownValue(statusDropdown, user.getStatus());
 
-            // Fill out remaining text fields using Lombok getters
-            WaitUtils.waitForElementToBeClickable(driver, usernameInput).sendKeys(user.getUsername());
-            WaitUtils.waitForElementToBeClickable(driver, passwordInput).sendKeys(user.getPassword());
-            WaitUtils.waitForElementToBeClickable(driver, confirmPasswordInput).sendKeys(user.getConfirmPassword());
+            String uniqueUsername = user.getUsername() + System.currentTimeMillis();
+            user.setUsername(uniqueUsername);
 
-            WaitUtils.waitForElementToBeClickable(driver, saveButton).click();
+            // Fill out remaining text fields using Lombok getters
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), usernameInput).sendKeys(user.getUsername());
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), passwordInput).sendKeys(user.getPassword());
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), confirmPasswordInput).sendKeys(user.getConfirmPassword());
+
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), saveButton).click();
         }
 
         /**
          * Private helper method to handle custom stylized div/role options dropdowns.
          */
         private void selectDropdownValue(By dropdownLocator, String visibleText) {
-            WaitUtils.waitForElementToBeClickable(driver, dropdownLocator).click();
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), dropdownLocator).click();
             By optionLocator = By.xpath("//div[@role='option' and normalize-space()='" + visibleText + "']");
-            WaitUtils.waitForElementToBeClickable(driver, optionLocator).click();
+            WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), optionLocator).click();
         }
     }
 

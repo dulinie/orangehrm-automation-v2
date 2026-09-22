@@ -4,8 +4,8 @@
 <!-- Added parallel="methods" to run every @Test method at the same time -->
 <!-- Added thread-count="3" to spin up 3 browser sessions concurrently -->
 
-<!--<suite name="OrangeHRM Automation Suite V2" parallel="methods" thread-count="3">-->
-<suite name="OrangeHRM Automation Suite V2">
+<suite name="OrangeHRM Automation Suite V2" parallel="methods" thread-count="3">
+<!--<suite name="OrangeHRM Automation Suite V2">-->
     <listeners>
         <listener class-name="com.dulinie.automation.listeners.TestNGListener"/>
 

@@ -48,7 +48,7 @@ public class WaitUtils {
         // Configure a FluentWait that polls every 500ms and ignores standard flakiness exceptions
         return new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(getTimeout()))
-                .pollingEvery(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(new Function<WebDriver, WebElement>() {

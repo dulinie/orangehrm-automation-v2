@@ -6,19 +6,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AdminPage {
-    private final WebDriver driver;
+   // private final WebDriver driver;
 
 
-    private final By adminHeader = By.xpath("//h6[text()='Admin']");
+    private final By adminHeader = By.xpath("//h6[text() ='Admin']");
     private final By addEmployeeButton = By.xpath("//button[@type='button' and text()=' Add ']");
 
-    public AdminPage() {
+  /*  public AdminPage() {
         driver = DriverManager.getDriver();
 
-    }
+    }*/
 
     public String validateAdminPageTitle() {
-        return driver.getTitle();
+        return DriverManager.getDriver().getTitle();
 
 
     }
@@ -26,7 +26,7 @@ public class AdminPage {
     public boolean isAdminPageHeaderDisplayed() {
         {
             try{
-                return WaitUtils.waitForElementToBeVisible(driver, adminHeader).isDisplayed();
+                return WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(), adminHeader).isDisplayed();
 
             } catch (Exception e) {
                 return false;
@@ -35,8 +35,12 @@ public class AdminPage {
         }
     }
 
+    public String validateHeader(){
+        return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),adminHeader)).getText();
+    }
+
     public void verifyNavigateAddUser(){
-        WaitUtils.waitForElementToBeClickable(driver,addEmployeeButton).click();
+        WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(),addEmployeeButton).click();
 
     }
 }

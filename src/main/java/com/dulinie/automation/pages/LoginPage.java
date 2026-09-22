@@ -7,9 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
+
 public class LoginPage {
 
-    private final WebDriver driver;
+    //private final WebDriver driver;
 
     //Definning Object Repository for Login Page
     private final By username = By.name("username");
@@ -19,10 +20,10 @@ public class LoginPage {
 
 
 
-    public LoginPage(){
+   /* public LoginPage(){
         driver = DriverManager.getDriver();
 
-    }
+    }*/
 
     public void loginWithDefaultCredentials() {
         // Get Data from config factory
@@ -37,11 +38,11 @@ public class LoginPage {
 
 
         // Wait for fields to be visible before interacting
-        WaitUtils.waitForElementToBeVisible(driver, username).sendKeys(user);
-        WaitUtils.waitForElementToBeVisible(driver, password).sendKeys(pass);
+        WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(), username).sendKeys(user);
+        WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(), password).sendKeys(pass);
 
         // Wait for the button to be clickable before clicking
-        WaitUtils.waitForElementToBeClickable(driver, loginButton).click();
+        WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), loginButton).click();
 
 
     }
@@ -49,7 +50,7 @@ public class LoginPage {
     public boolean isLogoDisplayed()
     {
         try{
-            return WaitUtils.waitForElementToBeInvisible(driver, orangeHrmLogo);
+            return WaitUtils.waitForElementToBeInvisible(DriverManager.getDriver(), orangeHrmLogo);
 
         } catch (Exception e) {
             return false;
@@ -58,7 +59,7 @@ public class LoginPage {
     }
 
     public String validateLoginPageTitle(){
-        return driver.getTitle();
+        return DriverManager.getDriver().getTitle();
     }
     }
 

@@ -7,38 +7,48 @@ import org.openqa.selenium.WebDriver;
 
 public class DashboardPage {
 
-    private final WebDriver driver;
+    //private final WebDriver driver;
 
     private final By dashboardHeader = By.xpath("//h6[text()='Dashboard']");
     private final By adminMenu = By.xpath("//span[text()='Admin']");
     private final By pimMenu = By.xpath("//span[text()='PIM']");
     private final By leaveMenu =By.xpath("//span[text()='Leave']");
 
-    public DashboardPage(){
+   /* public DashboardPage(){
         driver = DriverManager.getDriver();
 
-    }
+    }*/
 
     public String validateDashboardPageTitle() {
-        return driver.getTitle();
+        return DriverManager.getDriver().getTitle();
 
 
     }
 
     public boolean isDashboardHeaderDisplayed() {
-        {
-            try{
-                return WaitUtils.waitForElementToBeVisible(driver, dashboardHeader).isDisplayed();
 
-            } catch (Exception e) {
-                return false;
-            }
+        try{
+            return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),dashboardHeader).isDisplayed());
 
+        } catch (Exception e) {
+            return false;
         }
+
+    }
+
+    public String isDashboardHeaderName() {
+
+        try{
+            return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),dashboardHeader)).getText();
+
+        } catch (Exception e) {
+            return "";
+        }
+
     }
 
     public AdminPage clickAdminMenu() {
-        WaitUtils.waitForElementToBeClickable(driver, adminMenu).click();
+        WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), adminMenu).click();
         return new AdminPage();
 
     }

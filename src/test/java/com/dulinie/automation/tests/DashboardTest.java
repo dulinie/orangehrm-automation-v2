@@ -19,22 +19,27 @@ public class DashboardTest extends BaseTest {
     public void initializePage() {
         // Initialize the page object once before every test method execution
         loginPage = new LoginPage();
+        dashboardPage = new DashboardPage();
         loginPage.loginWithDefaultCredentials();
 
             }
 
-    @Test(priority = 1,description = "Verify that the Dashboard Heading is displayed in the Dashboard page")
-    public void verifyDashboardHeaderDisplay() {
-        dashboardPage = new DashboardPage();
-        boolean isHeaderDispayed = dashboardPage.isDashboardHeaderDisplayed();
-        Assert.assertTrue(isHeaderDispayed,"OrangeHRM Dashboard header was not displayed on the dashboard page.");
+    @Test(priority = 1,description = "Verify the Dashboard Heading is displayed in the Dashboard page")
+    public void verifyDashboardPageHeaderDisplayed() {
+        boolean isHeaderDisplayed = dashboardPage.isDashboardHeaderDisplayed();
+        Assert.assertTrue(isHeaderDisplayed,"OrangeHRM Dashboard heading is not displayed on the Dashboard page.");
     }
 
-    @Test(priority = 2, description = "Verify that the login page title is correct")
+    @Test(priority = 2, description = "Verify the Dashboard page title is correct")
     public void verifyDashboardPageTitle(){
-        dashboardPage = new DashboardPage();
         String pageTitle = dashboardPage.validateDashboardPageTitle();
         Assert.assertEquals(pageTitle,"OrangeHRM", "The dashboard page title does not match.");
+    }
+
+    @Test(priority = 3,description = "Verify the Dashboard Heading name is correct")
+    public void verifyDashboardPageHeaderName() {
+        String headerName = dashboardPage.isDashboardHeaderName();
+        Assert.assertEquals(headerName,"Dashboard","OrangeHRM Dashboard heading is not displayed on the Dashboard page.");
     }
 
 

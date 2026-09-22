@@ -19,26 +19,33 @@ public class AdminTest extends BaseTest {
     public void initializePage() {
         // Initialize the page object once before every test method execution
         loginPage = new LoginPage();
+        dashboardPage = new DashboardPage();
+        adminPage = new AdminPage();
+
         loginPage.loginWithDefaultCredentials();
 
     }
 
-
-    @Test
-    public void testNavigationToAdmin() {
-        dashboardPage = new DashboardPage();
-        adminPage = new AdminPage();
-        dashboardPage.clickAdminMenu();
-        boolean isAdminHeaderVisible = adminPage.isAdminPageHeaderDisplayed();
-        Assert.assertTrue(isAdminHeaderVisible, "Failed to navigate to the Admin page. Header not found.");
-    }
-
-    @Test(priority = 1,description = "Verify that the Admin Heading is displayed in the Admin page")
-    public void verifyAdminPageHeaderDisplay() {
-        dashboardPage = new DashboardPage();
-        adminPage = new AdminPage();
+    @Test(priority = 1,description = "Verify the Admin heading is displayed in the Admin page")
+    public void verifyAdminPageHeaderDisplayed() {
         dashboardPage.clickAdminMenu();
         boolean isAdminHeaderDisplayed = adminPage.isAdminPageHeaderDisplayed();
         Assert.assertTrue(isAdminHeaderDisplayed,"OrangeHRM Admin header was not displayed on the Admin page.");
+    }
+
+    @Test(priority = 2, description = "Verify Admin page title is correct")
+    public void verifyAdminPageTitle() {
+        dashboardPage.clickAdminMenu();
+
+        String isAdminTitleVisible = adminPage.validateAdminPageTitle();
+        Assert.assertEquals(isAdminTitleVisible,"OrangeHRM");
+
+    }
+
+    @Test(priority = 3, description = "Verify Admin Header is correct")
+    public void verifyAdminPageHeaderName(){
+        dashboardPage.clickAdminMenu();
+        String headerName = adminPage.validateHeader();
+        Assert.assertEquals(headerName,"Admin", "Admin header is incorrect");
     }
 }
