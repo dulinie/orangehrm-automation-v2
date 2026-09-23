@@ -4,13 +4,9 @@ import com.dulinie.automation.driver.DriverManager;
 import com.dulinie.automation.models.SystemUser;
 import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Wait;
 
 
 public class AddUser {
-
-      // private final WebDriver driver;
 
         // Object Repository
         private final By addUserHeading = By.xpath("//h6[text()='Add User']");
@@ -22,12 +18,7 @@ public class AddUser {
         private final By confirmPasswordInput = By.xpath("//label[text()='Confirm Password']/../following-sibling::div//input[@type='password']");
         private final By saveButton = By.xpath("//button[@type='submit' and normalize-space()='Save']");
 
-        //This code is commented to fix the issue mix session while parallel testing
-       /* public AddUser() {
-            this.driver = DriverManager.getDriver();
-        }*/
-
-        public String validateAddUserPageTitle() {
+      public String validateAddUserPageTitle() {
             return DriverManager.getDriver().getTitle();
         }
 

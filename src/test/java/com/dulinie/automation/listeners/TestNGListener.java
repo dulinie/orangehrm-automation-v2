@@ -36,9 +36,12 @@ public class TestNGListener implements ITestListener {
         private synchronized static void initializeExtentReport(String suiteName) {
             if (extent == null) {
                 log.info("🔧 Initializing Extent Reports engine for: " + suiteName);
-                String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
 
-                String historyReportPath = "target/automation-reports/Run_" + timestamp + "/Automation Execution Report.html";
+                String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+                System.setProperty("sharedRunTimestamp", timestamp);
+
+
+                String historyReportPath = "target/automation-reports/run-history_" + timestamp + "/Automation Execution Report.html";
                 String staticReportPath  = "target/automation-reports/latest-run/Automation Execution Report.html";
 
                 ExtentSparkReporter sparkHistory = new ExtentSparkReporter(historyReportPath);

@@ -17,7 +17,6 @@ public class DashboardTest extends BaseTest {
 
     @BeforeMethod
     public void initializePage() {
-        // Initialize the page object once before every test method execution
         loginPage = new LoginPage();
         dashboardPage = new DashboardPage();
         loginPage.loginWithDefaultCredentials();

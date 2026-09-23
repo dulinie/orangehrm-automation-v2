@@ -4,8 +4,6 @@ import com.dulinie.automation.config.ConfigManager;
 import com.dulinie.automation.driver.DriverManager;
 import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 
 
 public class LoginPage {
@@ -18,12 +16,6 @@ public class LoginPage {
     private final By loginButton = By.xpath("//button[@type='submit']");
     private final By orangeHrmLogo =By.xpath("//img[@alt='company-branding']");
 
-
-
-   /* public LoginPage(){
-        driver = DriverManager.getDriver();
-
-    }*/
 
     public void loginWithDefaultCredentials() {
         // Get Data from config factory

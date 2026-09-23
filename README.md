@@ -28,6 +28,7 @@ This framework automates core user journeys in OrangeHRM including:
 
 ## ⚙️ Continuous Integration
 The project includes CI/CD automation with GitHub Actions, running the Maven test suite in headless browser mode on pushes and pull requests and publishing execution reports as build artifacts.
+The framework also supports parallel test execution when needed, helping reduce overall test runtime.
 
 ## Project Structure
 
@@ -78,8 +79,6 @@ orangehrm-automation-v2/
 │           │   └── testng.xml
 │           └── testdata/
 │               └── systemusers.json
-├── automation-logs/
-├── automation-reports/
 ├── pom.xml
 ├── .gitignore
 ├── README.md
@@ -108,13 +107,16 @@ src/main/resources/config/qa.properties
 
 Example values:
 
-```properties
-browser = chrome
-url = https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-username = Admin
-password = admin123
+# Execution Target
+browser=chrome
+url=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+
+# Test Credentials (Use sandbox credentials only)
+username=Admin
+password=admin123
+
+# Framework Timeouts (Seconds)
 explicit.wait.timeout=12
-```
 
 ### Driver Manager
 
@@ -123,6 +125,7 @@ explicit.wait.timeout=12
 - Chrome
 - Firefox
 - Edge
+- Headless mode for CI/CD execution
 
 The driver is stored in a `ThreadLocal` object, which helps keep test execution isolated when parallel tests run.
 
@@ -187,8 +190,8 @@ You can also run the suite directly from IDE or via Maven if needed.
 - TestNG suite configuration: `src/test/resources/runner/testng.xml`
 - Logging configuration: `src/test/resources/log4j2.xml`
 - Surefire reports: `target/surefire-reports/`
-- Execution logs: `automation-logs/`
-- Automation reports: `automation-reports/`
+- Execution logs: `target/automation-logs/`
+- Automation reports: `target/automation-reports/`
 
 ## Notes
 
