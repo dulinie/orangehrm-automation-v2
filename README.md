@@ -201,4 +201,4 @@ You can also run the suite directly from IDE or via Maven if needed.
 
 ## Author
 
-Dulini Egodawatta
+✍️ **Dulini Egodawatta** - QA Automation Engineer
