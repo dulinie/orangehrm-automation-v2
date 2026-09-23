@@ -199,6 +199,6 @@ You can also run the suite directly from IDE or via Maven if needed.
 - Browser and app environment values are centralized in config files instead of hard-coded across tests.
 - Parallel execution is enabled in the TestNG suite configuration.
 
-## Author
+##Author
 
-✍️ **Dulini Egodawatta** - QA Automation Engineer
+✍️ **Dulini Harsha Egodawatta** - QA Automation Engineer
