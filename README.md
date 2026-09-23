@@ -107,15 +107,15 @@ src/main/resources/config/qa.properties
 
 Example values:
 
-# Execution Target
+Execution Target
 browser=chrome
 url=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 
-# Test Credentials (Use sandbox credentials only)
+Test Credentials (Use sandbox credentials only)
 username=Admin
 password=admin123
 
-# Framework Timeouts (Seconds)
+Framework Timeouts (Seconds)
 explicit.wait.timeout=12
 
 ### Driver Manager
