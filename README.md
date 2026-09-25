@@ -7,12 +7,12 @@ A Selenium-based Java test automation framework for the OrangeHRM demo applicati
 
 ## Overview
 
-This framework automates core user journeys in OrangeHRM including:
+This framework automates core user journeys in OrangeHRM, including:
 
 - Login validation
 - Dashboard verification
 - Admin page validation
-- Adding users through the Admin module
+- User creation through the Admin module
 - Data-driven test input using JSON files
 
 ## Tech Stack
@@ -26,7 +26,7 @@ This framework automates core user journeys in OrangeHRM including:
 - Owner Config library
 - Extent Reports
 
-## ⚙️ Continuous Integration
+## Continuous Integration
 The project includes CI/CD automation with GitHub Actions, running the Maven test suite in headless browser mode on pushes and pull requests and publishing execution reports as build artifacts.
 The framework also supports parallel test execution when needed, helping reduce overall test runtime.
 
@@ -149,7 +149,7 @@ Included tests:
 - `LoginTest` - validates login page behavior and successful login
 - `DashboardTest` - checks dashboard elements
 - `AdminTest` - checks admin page navigation and headings
-- `AddUserTest` - verifies add-user screen and user creation flow
+- `AddUserPageTest` - verifies add-user screen and user creation flow
 - `LoginDataDrivenTest` - available for data-driven login scenarios
 
 ### Data Handling
@@ -199,6 +199,10 @@ You can also run the suite directly from IDE or via Maven if needed.
 - Browser and app environment values are centralized in config files instead of hard-coded across tests.
 - Parallel execution is enabled in the TestNG suite configuration.
 
-##Author
+## Author
 
-✍️ **Dulini Harsha Egodawatta** - QA Automation Engineer
+**Dulini Egodawatta**
+
+## Project Purpose
+
+This repository demonstrates hands-on automation testing practice for a real-world web application using Java-based UI automation, maintainable test design, and reporting best practices.

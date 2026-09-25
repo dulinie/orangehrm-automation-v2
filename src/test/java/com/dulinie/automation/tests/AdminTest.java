@@ -45,7 +45,7 @@ public class AdminTest extends BaseTest {
     @Test(priority = 3, description = "Verify Admin Header is correct")
     public void verifyAdminPageHeaderName(){
         dashboardPage.clickAdminMenu();
-        String headerName = adminPage.validateHeader();
+        String headerName = adminPage.getAdminHeaderName();
         Assert.assertEquals(headerName,"Admin", "Admin header is incorrect");
     }
 }

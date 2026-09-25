@@ -2,7 +2,7 @@ package com.dulinie.automation.tests;
 
 import com.dulinie.automation.base.BaseTest;
 import com.dulinie.automation.models.SystemUser;
-import com.dulinie.automation.pages.AddUser;
+import com.dulinie.automation.pages.AddUserPage;
 import com.dulinie.automation.pages.AdminPage;
 import com.dulinie.automation.pages.DashboardPage;
 import com.dulinie.automation.pages.LoginPage;
@@ -15,19 +15,19 @@ import org.testng.annotations.Test;
 import java.util.Iterator;
 import java.util.List;
 
-public class AddUserTest extends BaseTest {
+public class AddUserPageTest extends BaseTest {
 
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
     private AdminPage adminPage;
-    private AddUser addUser;
+    private AddUserPage addUserPage;
 
     @BeforeMethod
     public void initializePage() {
         loginPage = new LoginPage();
         dashboardPage = new DashboardPage();
         adminPage = new AdminPage();
-        addUser = new AddUser();
+        addUserPage = new AddUserPage();
 
         loginPage.loginWithDefaultCredentials();
     }
@@ -44,9 +44,9 @@ public class AddUserTest extends BaseTest {
     @Test(priority = 1, description = "Verify the Add User Heading is displayed in the Add User page")
     public void verifyAddUserPageHeaderDisplayed(){
         dashboardPage.clickAdminMenu();
-        adminPage.verifyNavigateAddUser();
+        adminPage.navigateAddUser();
 
-        boolean addUserHeaderDisplayed = addUser.validateAddUserPageHeader();
+        boolean addUserHeaderDisplayed = addUserPage.validateAddUserPageHeader();
         Assert.assertTrue(addUserHeaderDisplayed,"Add User heading is not displayed on the Add User page.");
 
     }
@@ -54,9 +54,9 @@ public class AddUserTest extends BaseTest {
     @Test(priority = 2, description = "Verify the Add User page title is correct")
     public void verifyAddUserPageTitle(){
         dashboardPage.clickAdminMenu();
-        adminPage.verifyNavigateAddUser();
+        adminPage.navigateAddUser();
 
-        String addUserPageTitle = addUser.validateAddUserPageTitle();
+        String addUserPageTitle = addUserPage.validateAddUserPageTitle();
         Assert.assertEquals(addUserPageTitle,"OrangeHRM", "Title is wrong");
 
     }
@@ -64,9 +64,9 @@ public class AddUserTest extends BaseTest {
     @Test(priority = 3,description = "Verify header test is correct")
     public void verifyAddUserHeaderName(){
         dashboardPage.clickAdminMenu();
-        adminPage.verifyNavigateAddUser();
+        adminPage.navigateAddUser();
 
-        String addUserHeaderName = addUser.validateAddUserHeaderName();
+        String addUserHeaderName = addUserPage.getAddUserHeaderName();
         Assert.assertEquals(addUserHeaderName, "Add User", "Add User heading is incorrect");
 
     }
@@ -76,8 +76,10 @@ public class AddUserTest extends BaseTest {
     @Test(priority = 4, description = "Verify adding new system users", dataProvider = "systemUserData")
     public void verifyAddNewUser(SystemUser user) {
         dashboardPage.clickAdminMenu();
-        adminPage.verifyNavigateAddUser();
-        addUser.addNewUser(user);
+        adminPage.navigateAddUser();
+        String actualRedirectUrl = addUserPage.addNewUser(user);
+        Assert.assertTrue(actualRedirectUrl.contains("admin/viewSystemUsers"), "The user was not redirected to the expected URL after adding a new user.");
+
     }
 }
 

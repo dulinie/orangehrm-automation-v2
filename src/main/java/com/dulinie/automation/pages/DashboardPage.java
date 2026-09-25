@@ -29,7 +29,7 @@ public class DashboardPage {
 
     }
 
-    public String isDashboardHeaderName() {
+    public String getDashboardHeaderName() {
 
         try{
             return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),dashboardHeader)).getText();

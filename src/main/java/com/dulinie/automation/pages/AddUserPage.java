@@ -6,7 +6,7 @@ import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
 
 
-public class AddUser {
+public class AddUserPage {
 
         // Object Repository
         private final By addUserHeading = By.xpath("//h6[text()='Add User']");
@@ -34,7 +34,7 @@ public class AddUser {
 
     }
 
-    public String validateAddUserHeaderName(){
+    public String getAddUserHeaderName(){
             try{
                 return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),addUserHeading)).getText();
 
@@ -50,23 +50,27 @@ public class AddUser {
          * Fills out and submits the Add User form using the encapsulated SystemUser data model.
          * @param user The SystemUser entity containing the target test data.
          */
-        public void addNewUser(SystemUser user) {
+        public String addNewUser(SystemUser user) {
             // Handle OrangeHRM custom dropdowns using helper method
             selectDropdownValue(userRoleDropdown, user.getRole());
 
             // Handle autocomplete employee name lookup field
             WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), employeeNameInput).sendKeys(user.getEmployeeName());
 
+            // STABILIZATION STEP: Wait for OrangeHRM's dynamic 'Searching...' state to disappear
+            By searchingTextLocator = By.xpath("//div[@role='listbox' and contains(., 'Searching')]");
+            WaitUtils.waitForElementToBeInvisible(DriverManager.getDriver(), searchingTextLocator, 3);
+
 
             // Build a targeted dynamic locator using the employee's exact name
-            By dynamicEmpOption = By.xpath("//div[@role='listbox']//div[@role='option' and contains(., '" + user.getEmployeeName() + "')]");
+            By dynamicEmpOption = By.xpath("(//div[@role='listbox']//div[@role='option'])[1]");
             WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), dynamicEmpOption).click();
 
 
             selectDropdownValue(statusDropdown, user.getStatus());
 
             String uniqueUsername = user.getUsername() + System.currentTimeMillis();
-            user.setUsername(uniqueUsername);
+           // user.setUsername(uniqueUsername);
 
             // Fill out remaining text fields using Lombok getters
             WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), usernameInput).sendKeys(user.getUsername());
@@ -74,6 +78,11 @@ public class AddUser {
             WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), confirmPasswordInput).sendKeys(user.getConfirmPassword());
 
             WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), saveButton).click();
+
+            // Wait until the URL transitions to 'viewSystemUser' form
+            WaitUtils.waitForUrlToContain(DriverManager.getDriver(), "/admin/viewSystemUsers", 10);
+            return DriverManager.getDriver().getCurrentUrl();
+            //return uniqueUsername;
         }
 
         /**

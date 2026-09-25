@@ -18,7 +18,7 @@
             <class name="com.dulinie.automation.tests.DashboardTest"/>
            <!-- <class name="com.dulinie.automation.tests.LoginDataDrivenTest"/>-->
             <class name="com.dulinie.automation.tests.AdminTest"/>
-             <class name="com.dulinie.automation.tests.AddUserTest"/>
+             <class name="com.dulinie.automation.tests.AddUserPageTest"/>
 
         </classes>
     </test>

@@ -40,9 +40,14 @@ public class WaitUtils {
             return getWait(driver).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
         }
 
-        public static boolean waitForElementToBeInvisible(WebDriver driver, By locator) {
+        public static boolean waitForElementToBeInvisible(WebDriver driver, By locator, int timeoutInSeconds) {
             return getWait(driver).until(ExpectedConditions.invisibilityOfElementLocated(locator));
         }
+
+    public static void waitForUrlToContain(WebDriver driver, String urlFraction, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        wait.until(ExpectedConditions.urlContains(urlFraction));
+    }
 
     public static WebElement waitForElementWithPolling(WebDriver driver, By locator) {
         // Configure a FluentWait that polls every 500ms and ignores standard flakiness exceptions

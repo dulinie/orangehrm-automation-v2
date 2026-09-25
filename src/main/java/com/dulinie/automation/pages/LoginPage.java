@@ -8,8 +8,6 @@ import org.openqa.selenium.By;
 
 public class LoginPage {
 
-    //private final WebDriver driver;
-
     //Definning Object Repository for Login Page
     private final By username = By.name("username");
     private final By password = By.name("password");
@@ -42,7 +40,8 @@ public class LoginPage {
     public boolean isLogoDisplayed()
     {
         try{
-            return WaitUtils.waitForElementToBeInvisible(DriverManager.getDriver(), orangeHrmLogo);
+            return WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(), orangeHrmLogo).isDisplayed();
+
 
         } catch (Exception e) {
             return false;
