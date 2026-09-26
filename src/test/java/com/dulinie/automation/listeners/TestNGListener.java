@@ -13,6 +13,7 @@ import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.IConfigurationListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -20,7 +21,7 @@ import org.testng.ITestResult;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class TestNGListener implements ITestListener {
+public class TestNGListener implements ITestListener, IConfigurationListener {
 
 
         private static final Logger log = LogManager.getLogger(TestNGListener.class);
@@ -81,7 +82,7 @@ public class TestNGListener implements ITestListener {
         @Override
         public void onTestStart(ITestResult result) {
             String testName = result.getMethod().getMethodName();
-            log.info("🚀 Starting Test: " + testName);
+            log.info("Starting Test: " + testName);
 
             ThreadContext.put("logFileName", testName);
 
@@ -96,7 +97,7 @@ public class TestNGListener implements ITestListener {
 
         @Override
         public void onTestSuccess(ITestResult result) {
-            log.info("✅ PASSED: " + result.getMethod().getMethodName());
+            log.info("PASSED: " + result.getMethod().getMethodName());
 
             // Null-safe defensive check protecting thread execution steps
             if (extentTest.get() != null) {
@@ -108,7 +109,7 @@ public class TestNGListener implements ITestListener {
         @Override
         public void onTestFailure(ITestResult result) {
             String testName = result.getMethod().getMethodName();
-            log.error("❌ FAILED: " + testName, result.getThrowable());
+            log.error("FAILED: " + testName, result.getThrowable());
 
             if (extentTest.get() == null) {
                 log.warn("Execution failure reporting skipped: ThreadLocal ExtentTest node structure context is null.");
@@ -134,9 +135,42 @@ public class TestNGListener implements ITestListener {
             ThreadContext.remove("logFileName");
         }
 
+    @Override
+    public void onConfigurationFailure(ITestResult result) {
+        String configName = result.getMethod().getMethodName();
+        log.error("CONFIG FAILURE: " + configName, result.getThrowable());
+
+        // Configuration failures don't go through onTestStart, so there may be no
+        // ExtentTest node yet for this thread — create one on the fly if needed.
+        if (extent == null) {
+            initializeExtentReport("Configuration Failure Context");
+        }
+
+        ExtentTest test = extentTest.get();
+        if (test == null) {
+            test = extent.createTest("CONFIG FAILURE: " + configName);
+            extentTest.set(test);
+        }
+
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            if (driver != null) {
+                String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+                test.fail(result.getThrowable(),
+                        MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+            } else {
+                test.fail("Driver was null during configuration failure. Exception: " + result.getThrowable());
+            }
+        } catch (Exception e) {
+            log.error("Failed to capture screenshot on configuration failure: ", e);
+            test.fail("Screenshot capture failed. Exception: " + result.getThrowable());
+        }
+    }
+
+
         @Override
         public void onTestSkipped(ITestResult result) {
-            log.warn("⚠️ SKIPPED: " + result.getMethod().getMethodName());
+            log.warn("SKIPPED: " + result.getMethod().getMethodName());
             if (extentTest.get() != null) {
                 extentTest.get().skip("Test skipped.");
             }
@@ -145,7 +179,7 @@ public class TestNGListener implements ITestListener {
 
         @Override
         public void onFinish(ITestContext context) {
-            log.info("⏹️ FINISHED TEST SUITE: " + context.getName());
+            log.info("FINISHED TEST SUITE: " + context.getName());
             if (extent != null) {
                 extent.flush();
             }

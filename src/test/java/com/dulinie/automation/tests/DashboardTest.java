@@ -30,18 +30,15 @@ public class DashboardTest extends BaseTest {
     }
 
     @Test(priority = 2, description = "Verify the Dashboard page title is correct")
-    public void verifyDashboardPageTitle(){
-        String pageTitle = dashboardPage.validateDashboardPageTitle();
-        Assert.assertEquals(pageTitle,"OrangeHRM", "The dashboard page title does not match.");
+    public void verifyDashboardPageTitle() {
+        String pageTitle = dashboardPage.getDashboardPageTitle();
+        Assert.assertEquals(pageTitle, "OrangeHRM", "The dashboard page title does not match.");
     }
 
-    @Test(priority = 3,description = "Verify the Dashboard Heading name is correct")
+    @Test(priority = 3, description = "Verify the Dashboard Heading name is correct")
     public void verifyDashboardPageHeaderName() {
-        String headerName = dashboardPage.getDashboardHeaderName();
-        Assert.assertEquals(headerName,"Dashboard","OrangeHRM Dashboard heading is not displayed on the Dashboard page.");
+        String headerName = dashboardPage.getDashboardHeaderText();
+        Assert.assertEquals(headerName, "Dashboard", "OrangeHRM Dashboard heading is not displayed on the Dashboard page.");
     }
-
-
-    }
-
+}
 

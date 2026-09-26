@@ -1,50 +1,39 @@
 package com.dulinie.automation.pages;
 
-import com.dulinie.automation.driver.DriverManager;
-import com.dulinie.automation.utils.WaitUtils;
 import org.openqa.selenium.By;
 
-public class DashboardPage {
+public class DashboardPage extends BasePage {
 
     private final By dashboardHeader = By.xpath("//h6[text()='Dashboard']");
     private final By adminMenu = By.xpath("//span[text()='Admin']");
     private final By pimMenu = By.xpath("//span[text()='PIM']");
-    private final By leaveMenu =By.xpath("//span[text()='Leave']");
+    private final By leaveMenu = By.xpath("//span[text()='Leave']");
 
+    public String getDashboardPageTitle() {
+        return getPageTitle();
+    }
 
     public String validateDashboardPageTitle() {
-        return DriverManager.getDriver().getTitle();
-
-
+        return getDashboardPageTitle();
     }
 
     public boolean isDashboardHeaderDisplayed() {
+        return isDisplayedSafely(dashboardHeader);
+    }
 
-        try{
-            return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),dashboardHeader).isDisplayed());
-
-        } catch (Exception e) {
-            return false;
-        }
-
+    public String getDashboardHeaderText() {
+        return waitVisible(dashboardHeader).getText();
     }
 
     public String getDashboardHeaderName() {
-
-        try{
-            return (WaitUtils.waitForElementToBeVisible(DriverManager.getDriver(),dashboardHeader)).getText();
-
-        } catch (Exception e) {
-            return "";
-        }
-
+        return getDashboardHeaderText();
     }
 
     public void clickAdminMenu() {
-        WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), adminMenu).click();
-
+        waitVisible(adminMenu).click();
     }
 
-
-
+    public void openAdminPage() {
+        clickAdminMenu();
+    }
 }

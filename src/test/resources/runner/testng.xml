@@ -8,6 +8,7 @@
 <!--<suite name="OrangeHRM Automation Suite V2">-->
     <listeners>
         <listener class-name="com.dulinie.automation.listeners.TestNGListener"/>
+        <listener class-name="com.dulinie.automation.listeners.RetryTransformer"/>
 
     </listeners>
 

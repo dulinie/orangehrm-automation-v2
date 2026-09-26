@@ -42,33 +42,30 @@ public class AddUserPageTest extends BaseTest {
     }
 
     @Test(priority = 1, description = "Verify the Add User Heading is displayed in the Add User page")
-    public void verifyAddUserPageHeaderDisplayed(){
+    public void verifyAddUserPageHeaderDisplayed() {
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
 
-        boolean addUserHeaderDisplayed = addUserPage.validateAddUserPageHeader();
-        Assert.assertTrue(addUserHeaderDisplayed,"Add User heading is not displayed on the Add User page.");
-
+        boolean addUserHeaderDisplayed = addUserPage.isAddUserPageHeaderDisplayed();
+        Assert.assertTrue(addUserHeaderDisplayed, "Add User heading is not displayed on the Add User page.");
     }
 
     @Test(priority = 2, description = "Verify the Add User page title is correct")
-    public void verifyAddUserPageTitle(){
+    public void verifyAddUserPageTitle() {
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
 
-        String addUserPageTitle = addUserPage.validateAddUserPageTitle();
-        Assert.assertEquals(addUserPageTitle,"OrangeHRM", "Title is wrong");
-
+        String addUserPageTitle = addUserPage.getAddUserPageTitle();
+        Assert.assertEquals(addUserPageTitle, "OrangeHRM", "Title is wrong");
     }
 
-    @Test(priority = 3,description = "Verify header test is correct")
-    public void verifyAddUserHeaderName(){
+    @Test(priority = 3, description = "Verify header text is correct")
+    public void verifyAddUserHeaderName() {
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
 
-        String addUserHeaderName = addUserPage.getAddUserHeaderName();
+        String addUserHeaderName = addUserPage.getAddUserHeaderText();
         Assert.assertEquals(addUserHeaderName, "Add User", "Add User heading is incorrect");
-
     }
 
 

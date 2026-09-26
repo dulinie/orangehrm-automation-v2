@@ -37,15 +37,14 @@ public class AdminTest extends BaseTest {
     public void verifyAdminPageTitle() {
         dashboardPage.clickAdminMenu();
 
-        String isAdminTitleVisible = adminPage.validateAdminPageTitle();
-        Assert.assertEquals(isAdminTitleVisible,"OrangeHRM");
-
+        String adminPageTitle = adminPage.getAdminPageTitle();
+        Assert.assertEquals(adminPageTitle, "OrangeHRM");
     }
 
     @Test(priority = 3, description = "Verify Admin Header is correct")
-    public void verifyAdminPageHeaderName(){
+    public void verifyAdminPageHeaderName() {
         dashboardPage.clickAdminMenu();
-        String headerName = adminPage.getAdminHeaderName();
-        Assert.assertEquals(headerName,"Admin", "Admin header is incorrect");
+        String headerName = adminPage.getAdminHeaderText();
+        Assert.assertEquals(headerName, "Admin", "Admin header is incorrect");
     }
 }

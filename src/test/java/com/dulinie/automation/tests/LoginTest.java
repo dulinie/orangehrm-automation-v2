@@ -20,10 +20,10 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(priority = 2, description = "Verify the login page title is correct")
-    public void verifyLoginPageTitle(){
+    public void verifyLoginPageTitle() {
         loginPage = new LoginPage();
-        String pageTitle = loginPage.validateLoginPageTitle();
-        Assert.assertEquals(pageTitle,"OrangeHRM", "The login page title does not match.");
+        String pageTitle = loginPage.getLoginPageTitle();
+        Assert.assertEquals(pageTitle, "OrangeHRM", "The login page title does not match.");
     }
 
     @Test(priority = 3, description = "Verify successful login to the application ")

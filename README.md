@@ -3,8 +3,7 @@
 
 [![OrangeHRM Parallel Automation Suite](https://github.com/dulinie/orangehrm-automation-v2/actions/workflows/regression.yml/badge.svg)](https://github.com/dulinie/orangehrm-automation-v2/actions/workflows/regression.yml)
 
-A Selenium-based Java test automation framework for the OrangeHRM demo application, built with Maven and TestNG. The project follows the Page Object Model (POM) design pattern to keep tests readable, maintainable, and reusable.
-
+A Java-based Selenium and TestNG automation framework for the OrangeHRM demo application, designed around the Page Object Model with thread-safe parallel execution, centralized environment configuration, automatic retry on failure, and CI/CD-integrated reporting with failure screenshots.
 ## Overview
 
 This framework automates core user journeys in OrangeHRM, including:
@@ -35,6 +34,8 @@ The framework also supports parallel test execution when needed, helping reduce 
 ```text
 orangehrm-automation-v2/
 ├── .github/
+│   └── workflows/
+│       └── regression.yml
 ├── .idea/
 ├── .mvn/
 ├── src/
@@ -49,10 +50,11 @@ orangehrm-automation-v2/
 │   │   │       ├── models/
 │   │   │       │   └── SystemUser.java
 │   │   │       ├── pages/
+│   │   │       │   ├── BasePage.java
 │   │   │       │   ├── LoginPage.java
 │   │   │       │   ├── DashboardPage.java
 │   │   │       │   ├── AdminPage.java
-│   │   │       │   └── AddUser.java
+│   │   │       │   └── AddUserPage.java
 │   │   │       └── utils/
 │   │   │           ├── JsonDataReader.java
 │   │   │           └── WaitUtils.java
@@ -62,17 +64,20 @@ orangehrm-automation-v2/
 │   │           ├── stage.properties
 │   │           └── loginData.json
 │   └── test/
-│       ├── java/com/dulinie/automation/
-│       │   ├── base/
-│       │   │   └── BaseTest.java
-│       │   ├── listeners/
-│       │   │   └── TestNGListener.java
-│       │   └── tests/
-│       │       ├── LoginTest.java
-│       │       ├── LoginDataDrivenTest.java
-│       │       ├── DashboardTest.java
-│       │       ├── AdminTest.java
-│       │       └── AddUserTest.java
+│       ├── java/
+│       │   └── com/dulinie/automation/
+│       │       ├── base/
+│       │       │   └── BaseTest.java
+│       │       ├── listeners/
+│       │       │   ├── TestNGListener.java
+│       │       │   ├── RetryAnalyzer.java
+│       │       │   └── RetryTransformer.java
+│       │       └── tests/
+│       │           ├── LoginTest.java
+│       │           ├── LoginDataDrivenTest.java
+│       │           ├── DashboardTest.java
+│       │           ├── AdminTest.java
+│       │           └── AddUserPageTest.java
 │       └── resources/
 │           ├── log4j2.xml
 │           ├── runner/
@@ -82,6 +87,7 @@ orangehrm-automation-v2/
 ├── pom.xml
 ├── .gitignore
 ├── README.md
+├── orangehrm-automation-v2.iml
 └── target/
 ```
 
@@ -133,10 +139,11 @@ The driver is stored in a `ThreadLocal` object, which helps keep test execution 
 
 The `pages` package contains reusable page classes that represent different screens in OrangeHRM:
 
+- `BasePage.java` — shared Selenium helpers and common page actions
 - `LoginPage.java`
 - `DashboardPage.java`
 - `AdminPage.java`
-- `AddUser.java`
+- `AddUserPage.java`
 
 These classes store locators and actions for each page, reducing duplication and keeping tests easier to read.
 
@@ -147,9 +154,9 @@ The `src/test/java/com/dulinie/automation/tests` package contains the actual val
 Included tests:
 
 - `LoginTest` - validates login page behavior and successful login
-- `DashboardTest` - checks dashboard elements
-- `AdminTest` - checks admin page navigation and headings
-- `AddUserPageTest` - verifies add-user screen and user creation flow
+- `DashboardTest` - checks dashboard elements and title/header validation
+- `AdminTest` - checks admin page navigation and heading validation
+- `AddUserPageTest` - verifies the add-user screen and user creation flow
 - `LoginDataDrivenTest` - available for data-driven login scenarios
 
 ### Data Handling
@@ -203,6 +210,6 @@ You can also run the suite directly from IDE or via Maven if needed.
 
 **Dulini Egodawatta**
 
-## Project Purpose
+### Project Purpose
 
-This repository demonstrates hands-on automation testing practice for a real-world web application using Java-based UI automation, maintainable test design, and reporting best practices.
+This repository showcases a Java-based UI automation framework engineered for maintainability and scale — featuring thread-safe parallel execution, centralized environment configuration, JSON-driven test data, automatic retry handling, and CI/CD-integrated reporting with failure screenshots — built to reflect enterprise test automation practices.
