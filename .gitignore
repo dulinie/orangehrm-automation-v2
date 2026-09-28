@@ -1,43 +1,21 @@
+# Build output
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.kotlin
-# Ignore dynamic automation test outputs
+out/
+test-output/
+
+# Framework outputs (already under target/, kept as a safeguard)
 automation-logs/
 automation-reports/
 
-
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# IntelliJ IDEA
+.idea/
 *.iml
+*.iws
 *.ipr
 
-### Eclipse ###
-.apt_generated
+# Eclipse / VS Code / OS
 .classpath
-.factorypath
 .project
-.settings
-.springBeans
-.sts4-cache
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+.settings/
 .vscode/
-
-### Mac OS ###
 .DS_Store
