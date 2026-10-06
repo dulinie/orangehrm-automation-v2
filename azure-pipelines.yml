@@ -1,0 +1,45 @@
+# 1. Triggers map directly from GitHub 'on: push' and 'pull_request'
+trigger:
+  - main
+  - master
+
+pr:
+  - main
+  - master
+
+# 2. Virtual Machine environment matches 'runs-on: ubuntu-latest'
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  # 3. Checkout code is implicit in Azure Pipelines, no action needed!
+
+  # 4. Set up Java Environment (Matches actions/setup-java@v5)
+  - task: JavaToolInstaller@0
+    displayName: 'Set up JDK 25'
+    inputs:
+      versionSpec: '25'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+
+  # 5. Run TestNG Suite and auto-cache dependencies (Matches Maven execution + caching)
+  - task: Maven@4
+    displayName: 'Execute Parallel Test Suite'
+    continueOnError: true # Matches the '|| true' flag from your GitHub action script
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean test'
+      # Passes your exact execution flags (-Denv=qa -Dheadless=true)
+      options: '-Denv=qa -Dheadless=true'
+      optionsCacheEnabled: true # Natively caches your ~/.m2 repository packages
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml' # Auto-graphs test cases inside Azure DevOps
+
+  # 6. Archive Execution Reports (Matches actions/upload-artifact@v4)
+  - task: PublishBuildArtifacts@1
+    displayName: 'Archive Test Execution Reports'
+    condition: always() # Matches 'if: always()' to ensure it runs even if tests fail
+    inputs:
+      PathtoPublish: 'target/automation-reports/latest-run/'
+      ArtifactName: 'Automation-Execution-Reports'
+      publishLocation: 'Container'
