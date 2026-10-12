@@ -45,6 +45,7 @@ steps:
       testRunTitle: 'Automated Module Execution'
       testPlanId: '9'
       testSuiteId: '10'
+      testConfiguration: 'Windows 10'
 
 
   # 6. Archive Execution Reports (Matches actions/upload-artifact@v4)
