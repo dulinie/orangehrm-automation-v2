@@ -29,16 +29,28 @@ steps:
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean test'
-      # Passes your exact execution flags (-Denv=qa -Dheadless=true)
       options: '-Denv=qa -Dheadless=true'
-      optionsCacheEnabled: true # Natively caches your ~/.m2 repository packages
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml' # Auto-graphs test cases inside Azure DevOps
+      optionsCacheEnabled: true
+      publishJUnitResults: false
+
+    # 5b. Publish Results directly to the Parent Test Plan
+  - task: PublishTestResults@2
+    displayName: 'Sync Results to Free Month Test Plan'
+    condition: always()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      mergeTestResults: true
+      # --- TRACE TRHOUGH ROOT PLAN ---
+      testRunTitle: 'Automated Module Execution'
+      testPlanId: '9'
+      testSuiteId: '10'
+
 
   # 6. Archive Execution Reports (Matches actions/upload-artifact@v4)
   - task: PublishBuildArtifacts@1
     displayName: 'Archive Test Execution Reports'
-    condition: always() # Matches 'if: always()' to ensure it runs even if tests fail
+    condition: always()
     inputs:
       PathtoPublish: 'target/automation-reports/latest-run/'
       ArtifactName: 'Automation-Execution-Reports'
