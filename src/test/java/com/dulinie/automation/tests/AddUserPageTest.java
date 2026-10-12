@@ -56,7 +56,7 @@ public class AddUserPageTest extends BaseTest {
         adminPage.navigateAddUser();
 
         String addUserPageTitle = addUserPage.getAddUserPageTitle();
-        Assert.assertEquals(addUserPageTitle, "OrangeHRM", "Title is wrong");
+        Assert.assertEquals(addUserPageTitle, "OrangeHRM", "The Add User page title does not match.");
     }
 
     @Test(priority = 3, description = "Verify header text is correct")

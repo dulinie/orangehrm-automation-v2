@@ -38,7 +38,7 @@ public class DashboardTest extends BaseTest {
     @Test(priority = 3, description = "Verify the Dashboard Heading name is correct")
     public void verifyDashboardPageHeaderName() {
         String headerName = dashboardPage.getDashboardHeaderText();
-        Assert.assertEquals(headerName, "Dashboard", "OrangeHRM Dashboard heading is not displayed on the Dashboard page.");
+        Assert.assertEquals(headerName, "Dashboard", "OrangeHRM Dashboard heading is incorrect in the Dashboard page.");
     }
 }
 
