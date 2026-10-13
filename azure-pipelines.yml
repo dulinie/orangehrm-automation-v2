@@ -43,8 +43,8 @@ steps:
       mergeTestResults: true
       # --- TRACE TRHOUGH ROOT PLAN ---
       testRunTitle: 'Automated Module Execution'
-      testPlanId: '9'
-      testSuiteId: '10'
+      testPlanId: '51'
+      testSuiteId: '54'
       testConfiguration: 'Windows 10'
 
 
