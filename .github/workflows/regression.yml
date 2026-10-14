@@ -35,15 +35,15 @@ jobs:
         run: mvn -B clean test -Denv=qa -Dheadless=true
 
 
-      # publish JUnit annotations in the PR
-      - name: Publish test report (annotations)
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-           name: OrangeHRM Automation
-           path: target/surefire-reports/TEST-*.xml
-           reporter: junit
-           fail-on-error: false
+#      # publish JUnit annotations in the PR
+#      - name: Publish test report (annotations)
+#        uses: dorny/test-reporter@v1
+#        if: always()
+#        with:
+#           name: OrangeHRM Automation
+#           path: target/surefire-reports/TEST-*.xml
+#           reporter: junit
+#           fail-on-error: false
 
       - name: Archive Test Execution Reports
         if: always()
