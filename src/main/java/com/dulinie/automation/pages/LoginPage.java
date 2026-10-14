@@ -23,10 +23,12 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLogoDisplayed() {
+
         return isDisplayedSafely(orangeHrmLogo);
     }
 
     public String getLoginPageTitle() {
+        waitVisible(usernameInput); // Ensure the page is loaded before getting the title
         return getPageTitle();
     }
 

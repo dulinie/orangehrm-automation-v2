@@ -121,6 +121,7 @@ public class TestNGListener implements ITestListener, IConfigurationListener {
                 WebDriver driver = DriverManager.getDriver();
 
                 if (driver != null) {
+                    log.error("URL at failure: {} | Title: {}", driver.getCurrentUrl(), driver.getTitle());
                     String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
                     extentTest.get().fail(result.getThrowable(),
                             MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
