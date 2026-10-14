@@ -25,7 +25,7 @@ steps:
   # 5. Run TestNG Suite and auto-cache dependencies (Matches Maven execution + caching)
   - task: Maven@4
     displayName: 'Execute Parallel Test Suite'
-    continueOnError: true # Matches the '|| true' flag from your GitHub action script
+
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean test'
