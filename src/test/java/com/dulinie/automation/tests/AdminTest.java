@@ -38,7 +38,7 @@ public class AdminTest extends BaseTest {
         dashboardPage.clickAdminMenu();
 
         String adminPageTitle = adminPage.getAdminPageTitle();
-        Assert.assertEquals(adminPageTitle, "OrangeHRM", "Admin page title is incorrect");
+        Assert.assertEquals(adminPageTitle, "OrangeHRM1", "Admin page title is incorrect");
     }
 
     @Test(priority = 3, description = "Verify Admin Header is correct")

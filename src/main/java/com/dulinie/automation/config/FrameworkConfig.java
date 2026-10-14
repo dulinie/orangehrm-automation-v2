@@ -29,5 +29,9 @@ public interface FrameworkConfig extends Config{
         @DefaultValue("10")    // Owner library automatically converts this string to an int!
         int timeout();
 
+        @Key("headless")
+        @DefaultValue("false")
+        boolean headless();
+
     }
 

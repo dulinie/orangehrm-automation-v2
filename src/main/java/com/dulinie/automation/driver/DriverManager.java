@@ -13,6 +13,10 @@ public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
+    private static final java.util.logging.Logger SELENIUM_LOG =
+            java.util.logging.Logger.getLogger("org.openqa.selenium");
+    static { SELENIUM_LOG.setLevel(java.util.logging.Level.SEVERE); }
+
     private DriverManager() {
     }
 
@@ -27,9 +31,11 @@ public class DriverManager {
     public static void initializeDriver() {
         java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(java.util.logging.Level.SEVERE);
 
+
         String browser = ConfigManager.getConfig().browser();
         String url = ConfigManager.getConfig().url();
-        boolean isHeadless = System.getProperty("headless", "false").equalsIgnoreCase("true");
+        boolean isHeadless = ConfigManager.getConfig().headless();
+       // boolean isHeadless = System.getProperty("headless", "false").equalsIgnoreCase("true");
 
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
@@ -45,7 +51,8 @@ public class DriverManager {
             FirefoxOptions options = new FirefoxOptions();
             if (isHeadless) {
                 options.addArguments("--headless");
-                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--width=1920");
+                options.addArguments("--height=1080");
             }
             setDriver(new FirefoxDriver(options));
         } else if (browser.equalsIgnoreCase("edge")) {
