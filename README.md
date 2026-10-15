@@ -2,7 +2,7 @@
 
 [![OrangeHRM Parallel Automation Suite](https://github.com/dulinie/orangehrm-automation-v2/actions/workflows/regression.yml/badge.svg)](https://github.com/dulinie/orangehrm-automation-v2/actions/workflows/regression.yml)
 [![Build Status](https://dev.azure.com/dulinie/OrangeHRM-Automation/_apis/build/status%2Fdulinie.orangehrm-automation-v2?branchName=main)](https://dev.azure.com/dulinie/OrangeHRM-Automation/_build/latest?definitionId=1&branchName=main)
-
+🎬 **[Download & Watch the Full Video Walkthrough](https://github.com/dulinie/orangehrm-automation-v2/releases/download/v1.0-demo-run/OrangeHRM.Automation.Demo.mp4)**
 
 A Java-based Selenium and TestNG automation framework for the OrangeHRM demo application, designed around the Page Object Model with thread-safe parallel execution, centralized environment configuration, automatic retry on failure, and CI/CD-integrated reporting with failure screenshots.
 
@@ -206,6 +206,10 @@ src/test/resources/runner/testng.xml
 ```
 
 You can also run the suite directly from your IDE or via Maven.
+
+To view a sample execution report with test metrics, download the artifact from the following GitHub Release.
+https://github.com/dulinie/orangehrm-automation-v2/releases#release-v1.0-demo-run
+
 
 ## Reporting and Logs
 
