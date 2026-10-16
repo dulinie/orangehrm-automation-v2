@@ -65,7 +65,7 @@ public class AddUserPageTest extends BaseTest {
         adminPage.navigateAddUser();
 
         String addUserHeaderName = addUserPage.getAddUserHeaderText();
-        Assert.assertEquals(addUserHeaderName, "Add User1", "Add User heading is incorrect");
+        Assert.assertEquals(addUserHeaderName, "Add User", "Add User heading is incorrect");
     }
 
 
