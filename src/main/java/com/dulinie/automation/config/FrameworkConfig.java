@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "system:properties",
         "system:env",
-        "classpath:config/${env}.properties", // Points to src/main/resources/config/qa.properties
+        "classpath:config/${env}.properties",
         "classpath:config/qa.properties"      // Baseline fallback if ${env} parameter is missing
 })
 
@@ -13,7 +13,7 @@ import org.aeonbits.owner.Config;
 public interface FrameworkConfig extends Config{
 
         @Key("browser")
-        @DefaultValue("chrome") // Fallback default if not explicitly provided
+        @DefaultValue("chrome")
         String browser();
 
         @Key("url")
@@ -25,9 +25,9 @@ public interface FrameworkConfig extends Config{
         @Key("password")
         String password();
 
-        @Key("explicit.wait.timeout")
-        @DefaultValue("10")    // Owner library automatically converts this string to an int!
-        int timeout();
+        @Key("explicitWaitTimeout")
+        @DefaultValue("10")
+        int timeout();  // Owner library automatically converts this string to an int!
 
         @Key("headless")
         @DefaultValue("false")
