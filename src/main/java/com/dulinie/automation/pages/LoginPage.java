@@ -17,9 +17,9 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String username, String password) {
-        waitVisible(usernameInput).sendKeys(username);
-        waitVisible(passwordInput).sendKeys(password);
-        waitClickable(loginButton).click();
+        type(usernameInput, username);
+        type(passwordInput, password);
+        click(loginButton);
     }
 
     public boolean isLogoDisplayed() {
@@ -32,9 +32,7 @@ public class LoginPage extends BasePage {
         return getPageTitle();
     }
 
-    public String validateLoginPageTitle() {
-        return getLoginPageTitle();
-    }
+
 }
 
 

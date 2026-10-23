@@ -20,24 +20,12 @@ public class AddUserPage extends BasePage {
         return getPageTitle();
     }
 
-    public String validateAddUserPageTitle() {
-        return getAddUserPageTitle();
-    }
-
     public boolean isAddUserPageHeaderDisplayed() {
         return isDisplayedSafely(addUserHeading);
     }
 
-    public boolean validateAddUserPageHeader() {
-        return isAddUserPageHeaderDisplayed();
-    }
-
     public String getAddUserHeaderText() {
         return waitVisible(addUserHeading).getText();
-    }
-
-    public String getAddUserHeaderName() {
-        return getAddUserHeaderText();
     }
 
     public String addNewUser(SystemUser user) {
@@ -48,7 +36,7 @@ public class AddUserPage extends BasePage {
         WaitUtils.waitForElementToBeInvisible(DriverManager.getDriver(), searchingTextLocator, 3);
 
         By dynamicEmpOption = By.xpath("(//div[@role='listbox']//div[@role='option'])[1]");
-        waitClickable(dynamicEmpOption).click();
+        click(dynamicEmpOption);
 
         selectDropdownValue(statusDropdown, user.getStatus());
 
@@ -57,14 +45,14 @@ public class AddUserPage extends BasePage {
         type(passwordInput, user.getPassword());
         type(confirmPasswordInput, user.getConfirmPassword());
 
-        waitClickable(saveButton).click();
+        click(saveButton);
         WaitUtils.waitForUrlToContain(DriverManager.getDriver(), "/admin/viewSystemUsers", 10);
         return DriverManager.getDriver().getCurrentUrl();
     }
 
     private void selectDropdownValue(By dropdownLocator, String visibleText) {
-        waitClickable(dropdownLocator).click();
+        click(dropdownLocator);
         By optionLocator = By.xpath("//div[@role='option' and normalize-space()='" + visibleText + "']");
-        waitClickable(optionLocator).click();
+        click(optionLocator);
     }
 }

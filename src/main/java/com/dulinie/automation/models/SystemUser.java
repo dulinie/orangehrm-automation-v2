@@ -2,8 +2,6 @@ package com.dulinie.automation.models;
 
 public class SystemUser {
 
-
-
         private String role;
         private String employeeName;
         private String status;

@@ -13,20 +13,12 @@ public class AdminPage extends BasePage {
         return getPageTitle();
     }
 
-    public String validateAdminPageTitle() {
-        return getAdminPageTitle();
-    }
-
     public boolean isAdminPageHeaderDisplayed() {
         return isDisplayedSafely(adminHeader);
     }
 
     public String getAdminHeaderText() {
         return waitVisible(adminHeader).getText();
-    }
-
-    public String getAdminHeaderName() {
-        return getAdminHeaderText();
     }
 
     public void openAddUserPage() {
@@ -38,8 +30,7 @@ public class AdminPage extends BasePage {
     }
 
     public void searchUserByUsername(String username) {
-        waitVisible(usernameSearchInput).clear();
-        waitVisible(usernameSearchInput).sendKeys(username);
-        waitClickable(searchButton).click();
+        type(usernameSearchInput, username);
+        click(searchButton);
     }
 }

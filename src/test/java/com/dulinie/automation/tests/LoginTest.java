@@ -8,28 +8,26 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    private LoginPage loginPage;
-    private DashboardPage dashboardPage;
 
 
     @Test(priority = 1,description = "Verify that the OrangeHRM logo is displayed on the login page")
     public void verifyLoginPageLogo() {
-        loginPage = new LoginPage();
+        LoginPage loginPage = new LoginPage();
         boolean isLogoDisplayed = loginPage.isLogoDisplayed();
         Assert.assertTrue(isLogoDisplayed,"OrangeHRM logo was not displayed on the login page.");
     }
 
     @Test(priority = 2, description = "Verify the login page title is correct")
     public void verifyLoginPageTitle() {
-        loginPage = new LoginPage();
+        LoginPage loginPage = new LoginPage();
         String pageTitle = loginPage.getLoginPageTitle();
         Assert.assertEquals(pageTitle, "OrangeHRM", "The login page title does not match.");
     }
 
     @Test(priority = 3, description = "Verify successful login to the application ")
     public void verifyLogin(){
-        loginPage = new LoginPage();
-        dashboardPage = new DashboardPage();
+        LoginPage loginPage = new LoginPage();
+        DashboardPage dashboardPage = new DashboardPage();
 
         loginPage.loginWithDefaultCredentials();
         boolean isDashboardHeaderVisible = dashboardPage.isDashboardHeaderDisplayed();

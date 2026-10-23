@@ -13,9 +13,6 @@ public class DashboardPage extends BasePage {
         return getPageTitle();
     }
 
-    public String validateDashboardPageTitle() {
-        return getDashboardPageTitle();
-    }
 
     public boolean isDashboardHeaderDisplayed() {
         return isDisplayedSafely(dashboardHeader);
@@ -25,9 +22,6 @@ public class DashboardPage extends BasePage {
         return waitVisible(dashboardHeader).getText();
     }
 
-    public String getDashboardHeaderName() {
-        return getDashboardHeaderText();
-    }
 
     public void clickAdminMenu() {
         waitVisible(adminMenu).click();

@@ -15,6 +15,10 @@ public class BasePage {
             return WaitUtils.waitForElementToBeClickable(DriverManager.getDriver(), locator);
         }
 
+        protected void click(By locator) {
+            waitClickable(locator).click();
+        }
+
         protected boolean isDisplayedSafely(By locator) {
             try {
                 return waitVisible(locator).isDisplayed();
@@ -28,8 +32,9 @@ public class BasePage {
         }
 
         protected void type(By locator, String text) {
-            waitClickable(locator).clear();
-            waitClickable(locator).sendKeys(text);
+            WebElement element = waitVisible(locator); // Evaluates and waits EXACTLY once
+            element.clear();
+            element.sendKeys(text);
     }
 
     }

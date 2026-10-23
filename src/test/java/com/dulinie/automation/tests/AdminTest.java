@@ -10,39 +10,36 @@ import org.testng.annotations.Test;
 
 public class AdminTest extends BaseTest {
 
-    private LoginPage loginPage;
-    private DashboardPage dashboardPage;
-    private AdminPage adminPage;
-
-
-    @BeforeMethod
+      @BeforeMethod
     public void initializePage() {
         // Initialize the page object once before every test method execution
-        loginPage = new LoginPage();
-        dashboardPage = new DashboardPage();
-        adminPage = new AdminPage();
-
+          LoginPage loginPage = new LoginPage();
         loginPage.loginWithDefaultCredentials();
 
     }
 
     @Test(priority = 1,description = "Verify the Admin heading is displayed in the Admin page")
     public void verifyAdminPageHeaderDisplayed() {
+        DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.clickAdminMenu();
+        AdminPage adminPage = new AdminPage();
         boolean isAdminHeaderDisplayed = adminPage.isAdminPageHeaderDisplayed();
         Assert.assertTrue(isAdminHeaderDisplayed,"OrangeHRM Admin header was not displayed on the Admin page.");
     }
 
     @Test(priority = 2, description = "Verify Admin page title is correct")
     public void verifyAdminPageTitle() {
+        DashboardPage dashboardPage = new DashboardPage();
+        AdminPage adminPage = new AdminPage();
         dashboardPage.clickAdminMenu();
-
         String adminPageTitle = adminPage.getAdminPageTitle();
         Assert.assertEquals(adminPageTitle, "OrangeHRM", "Admin page title is incorrect");
     }
 
     @Test(priority = 3, description = "Verify Admin Header is correct")
     public void verifyAdminPageHeaderName() {
+        DashboardPage dashboardPage = new DashboardPage();
+        AdminPage adminPage = new AdminPage();
         dashboardPage.clickAdminMenu();
         String headerName = adminPage.getAdminHeaderText();
         Assert.assertEquals(headerName, "Admin", "Admin header is incorrect");

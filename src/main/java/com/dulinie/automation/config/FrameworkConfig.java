@@ -29,6 +29,10 @@ public interface FrameworkConfig extends Config{
         @DefaultValue("10")
         int timeout();  // Owner library automatically converts this string to an int!
 
+        @Key("pageLoadTimeout")
+        @DefaultValue("30")
+        int pageLoadTimeout();
+
         @Key("headless")
         @DefaultValue("false")
         boolean headless();

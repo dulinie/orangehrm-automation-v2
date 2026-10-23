@@ -17,18 +17,9 @@ import java.util.List;
 
 public class AddUserPageTest extends BaseTest {
 
-    private LoginPage loginPage;
-    private DashboardPage dashboardPage;
-    private AdminPage adminPage;
-    private AddUserPage addUserPage;
-
     @BeforeMethod
     public void initializePage() {
-        loginPage = new LoginPage();
-        dashboardPage = new DashboardPage();
-        adminPage = new AdminPage();
-        addUserPage = new AddUserPage();
-
+        LoginPage loginPage = new LoginPage();
         loginPage.loginWithDefaultCredentials();
     }
 
@@ -43,6 +34,10 @@ public class AddUserPageTest extends BaseTest {
 
     @Test(priority = 1, description = "Verify the Add User Heading is displayed in the Add User page")
     public void verifyAddUserPageHeaderDisplayed() {
+        DashboardPage dashboardPage = new DashboardPage();
+        AdminPage adminPage = new AdminPage();
+        AddUserPage addUserPage = new AddUserPage();
+
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
 
@@ -52,6 +47,10 @@ public class AddUserPageTest extends BaseTest {
 
     @Test(priority = 2, description = "Verify the Add User page title is correct")
     public void verifyAddUserPageTitle() {
+        DashboardPage dashboardPage = new DashboardPage();
+        AdminPage adminPage = new AdminPage();
+        AddUserPage addUserPage = new AddUserPage();
+
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
 
@@ -61,6 +60,10 @@ public class AddUserPageTest extends BaseTest {
 
     @Test(priority = 3, description = "Verify header text is correct")
     public void verifyAddUserHeaderName() {
+        DashboardPage dashboardPage = new DashboardPage();
+        AdminPage adminPage = new AdminPage();
+        AddUserPage addUserPage = new AddUserPage();
+
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
 
@@ -72,6 +75,10 @@ public class AddUserPageTest extends BaseTest {
 
     @Test(priority = 4, description = "Verify adding new system users", dataProvider = "systemUserData")
     public void verifyAddNewUser(SystemUser user) {
+        DashboardPage dashboardPage = new DashboardPage();
+        AdminPage adminPage = new AdminPage();
+        AddUserPage addUserPage = new AddUserPage();
+
         dashboardPage.clickAdminMenu();
         adminPage.navigateAddUser();
         String actualRedirectUrl = addUserPage.addNewUser(user);

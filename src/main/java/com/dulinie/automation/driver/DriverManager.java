@@ -15,7 +15,11 @@ public class DriverManager {
 
     private static final java.util.logging.Logger SELENIUM_LOG =
             java.util.logging.Logger.getLogger("org.openqa.selenium");
-    static { SELENIUM_LOG.setLevel(java.util.logging.Level.SEVERE); }
+
+    static {
+        SELENIUM_LOG.setLevel(java.util.logging.Level.WARNING);
+
+    }
 
     private DriverManager() {
     }
@@ -29,13 +33,13 @@ public class DriverManager {
     }
 
     public static void initializeDriver() {
-        java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(java.util.logging.Level.SEVERE);
 
 
         String browser = ConfigManager.getConfig().browser();
         String url = ConfigManager.getConfig().url();
         boolean isHeadless = ConfigManager.getConfig().headless();
-       // boolean isHeadless = System.getProperty("headless", "false").equalsIgnoreCase("true");
+        int pageLoadTimeout = ConfigManager.getConfig().pageLoadTimeout();
+
 
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
@@ -72,15 +76,21 @@ public class DriverManager {
         if (!isHeadless) {
             getDriver().manage().window().maximize();
         }
-
+        getDriver().manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(pageLoadTimeout));
+        getDriver().manage().deleteAllCookies();
         getDriver().get(url);
     }
 
     public static void quitDriver() {
-        if (driver.get() != null) {
-            driver.get().quit();
-            driver.remove();
+        WebDriver webDriver = driver.get();
+        if (webDriver != null) {
+            try {
+                webDriver.quit();
+            } finally {
+                driver.remove();
+            }
         }
+
+
     }
 }
-
