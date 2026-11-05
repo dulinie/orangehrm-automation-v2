@@ -4,7 +4,7 @@
 [![Build Status](https://dev.azure.com/dulinie/OrangeHRM-Automation/_apis/build/status%2Fdulinie.orangehrm-automation-v2?branchName=main)](https://dev.azure.com/dulinie/OrangeHRM-Automation/_build/latest?definitionId=1&branchName=main)
 
 🎬 **[Download & Watch the Full Video Walkthrough](https://github.com/dulinie/orangehrm-automation-v2/releases/download/v1.0-demo-run/OrangeHRM.Automation.Demo.mp4)**
-🎬 **[Download & Watch the Full Video for Azure DevOps Walkthrough](https://github.com/dulinie/orangehrm-automation-v2/releases/download/v1.0-demo-run/Test.Management.on.AzureDevOps.mp4.mp4)**
+🎬 **[Download & Watch the Full Video for Azure DevOps Walkthrough](https://github.com/dulinie/orangehrm-automation-v2/releases/download/v1.0-demo-run/Test.Management.on.AzureDevOps.mp4)**
 
 A Java-based Selenium and TestNG automation framework for the OrangeHRM demo application, designed around the Page Object Model with thread-safe parallel execution, centralized environment configuration, automatic retry on failure, and CI/CD-integrated reporting with failure screenshots.
 
